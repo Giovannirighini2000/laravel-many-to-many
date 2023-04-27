@@ -3,9 +3,7 @@
 
 @section('content')
     
-<div>
-    modifica
-  </div>
+
   <div class="container">
       <form action="{{ route('projects.update',$project) }}" method="POST">
   
@@ -21,6 +19,27 @@
               </div>
             @enderror
           </div>
+
+          <div class="mb-3">
+              <label for="technologies" class="form-label">technologie</label>
+              <div class="d-flex @error('technologies') is-invalid @enderror flex-wrap gap-3">
+
+                @foreach($technologies as $key => $technology)
+                  <div class="form-check">
+                    <input name="technologies[]" @checked( in_array($technology->id, old('technologies',$project->getTechnologyIds()) ) ) class="form-check-input" type="checkbox" value="{{ $technology->id }}" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{ $technology->name }}
+                    </label>
+                  </div>
+                @endforeach
+              </div>
+
+              @error('technologies')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+              @enderror
+            </div>
   
           <div class="mb-3">
               <label for="slug" class="form-label">slug</label>
@@ -73,16 +92,16 @@
               @endforeach
             </select>
             
-            @error('type_id')
-              <div class="invalid-feedback">
-                  {{ $message }}
-              </div>
-            @enderror
-          </div>
-    
+              @error('type_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+              @enderror
+           </div>
+            <button type="submit" class="btn btn-primary">Salva</button>
         </div>
     
-          <button type="submit" class="btn btn-primary">Salva</button>
+          
       </form>
     
   

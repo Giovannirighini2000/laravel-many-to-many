@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\validation\Rule;
@@ -29,8 +30,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::orderBy('name', 'asc')->get();
+        $technologies = Technology::orderBy('name', 'asc')->get();
 
-        return view('projects.create', compact('types'));
+        return view('projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -47,6 +49,10 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug($data['title']);
 
         $project = Project::create($data);
+
+        if (isset($data['technologies'])) {
+            $project->technologies()->attach($data['technologies']);
+        }
 
         return to_route('projects.show', $project);
     }
@@ -71,8 +77,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::orderBy('name', 'asc')->get();
+        $technologies = Technology::orderBy('name', 'asc')->get();
 
-        return view('projects.edit', compact('project','types'));
+        return view('projects.edit', compact('project','types','technologies'));
     }
 
     /**
@@ -91,6 +98,12 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+
+        if (isset($data['technologies'])) {
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->sync([]);
+        }
 
         return to_route('projects.show', $project);
     }

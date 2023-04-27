@@ -33,7 +33,8 @@ class UpdateProjectRequest extends FormRequest
             'date' => 'nullable|string',
             'url' => 'nullable|string',
             'slug' => 'nullable|string',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id',
         
         ];
     }
