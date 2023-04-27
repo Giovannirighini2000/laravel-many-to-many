@@ -30,7 +30,7 @@
             <h2>Articoli correlati</h2>
             @if($project->type)
             <ul>
-                @foreach($project->type->projects as $type)
+                @foreach($project->getRelatedProjects() as $type)
                     <li>
                         <a href="{{ route('projects.show',$type)}}">
                             {{ $type->title }}

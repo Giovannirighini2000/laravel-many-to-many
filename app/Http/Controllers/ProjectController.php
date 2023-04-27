@@ -53,6 +53,7 @@ class ProjectController extends Controller
         if (isset($data['technologies'])) {
             $project->technologies()->attach($data['technologies']);
         }
+        
 
         return to_route('projects.show', $project);
     }
