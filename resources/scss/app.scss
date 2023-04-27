@@ -1,0 +1,42 @@
+@import '~bootstrap/scss/bootstrap';
+@import './general';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+}
+
+img {
+    max-width: 100%;
+}
+
+ul,
+ol,
+menu {
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.upsize {
+    text-transform: uppercase;
+}
+
+.center-items {
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+}
