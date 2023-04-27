@@ -22,6 +22,7 @@
                         <th>DATE</th>
                         <th>URL</th>
                         <th>TYPE</th>
+                        <th>Technologie</th>
                         <th>DATA ELIMINAZIONE</th>
                     </tr>
                 </thead>
@@ -34,10 +35,18 @@
                         <td>{{$project->description}}</td>
                         <td>{{$project->date}}</td>
                         <td>{{$project->url}}</td>
+                        <td> {{ $project->type ? $project->type->name : '-' }} </td>
+                        <td>
+                   
+                            @forelse($project->Technologies()->orderBy('name','asc')->get() as $technology )
+                                <span class="badge rounded-pill text-bg-light">{{ $technology->name }}</span>
+                            @empty
+                                -
+                            @endforelse
+                        </td>
                         <td>
                             {{ $project->trashed() ? $project->deleted_at : '' }}
                         </td>
-                        <td> {{ $project->type ? $project->type->name : '-' }} </td>
                         <td>
                             <a class="btn " href="{{route('projects.edit',$project)}}">MODIFICA</a>
                             
