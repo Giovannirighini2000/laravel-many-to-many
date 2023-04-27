@@ -12,11 +12,18 @@
                 @else
                     <span class="badge rounded-pill bg-secondary">Nessuna tipo trovato</span>
                 @endif
-        </h1></h1>
+            </h1>
             <p class="slug">{{$project->slug}}</p>
             <p class="description">{{$project->description}}</p>
             <p class="date">{{$project->date}}</p>
             <p class="url">{{$project->url}}</p>
+            <p class="flex">
+                @forelse($project->technologies as $technology )
+                    <span class="badge rounded-pill text-bg-light">{{ $technology->name }}</span>
+                @empty
+                    -
+                @endforelse
+            </p>
             
         </div>
         <div class="container">
@@ -35,6 +42,7 @@
                 nessun articolo correlato
             @endif
         </div>
+        
         <div>
             <a class="btn" href="{{route('projects.edit',$project)}}">MODIFICA</a>
             @if($project->trashed())

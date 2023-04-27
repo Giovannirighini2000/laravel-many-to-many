@@ -22,7 +22,7 @@
                         <th>DATE</th>
                         <th>URL</th>
                         <th>TYPE</th>
-                        <th>Technologie</th>
+                        <th>TECHNOLOGIE</th>
                         <th>DATA ELIMINAZIONE</th>
                     </tr>
                 </thead>
